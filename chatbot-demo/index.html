@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="fa-IR" dir="rtl" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>دستیار هوشمند آبادیس — مخازن طبی آبادیس</title>
+<meta name="description" content="دستیار هوشمند مشاور فروش و آکادمی آبادیس">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#e8f3f3">
+<script>(function(){var t;try{var q=new URLSearchParams(location.search).get('theme');if(q){localStorage.setItem('abadis-theme',q)}t=localStorage.getItem('abadis-theme')}catch(e){}var d=document.documentElement;d.dataset.theme=(t==='dark'||t==='noir')?t:'light';d.classList.add('js')})();</script>
+<link rel="icon" href="../favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/img/favicon-32.png">
+<link rel="stylesheet" href="../assets/css/site.css?v=20261102kc">
+<link rel="stylesheet" href="../assets/chatbot/chatbot.css">
+</head>
+<body>
+<a class="skip" href="#main">پرش به محتوا</a>
+<header class="header" id="header">
+  <a class="logo on-light" href="../">
+    <img class="lg-light" src="../assets/img/abadis-logo-teal.svg" width="646" height="309" alt="مخازن طبی آبادیس">
+    <img class="lg-dark" src="../assets/img/abadis-logo-white.svg" width="646" height="309" alt="" aria-hidden="true">
+  </a>
+  <button class="theme-toggle on-light" type="button" id="themeBtn" aria-label="حالت نمایش">تم</button>
+</header>
+<main id="main">
+  <section class="chat-demo" style="padding:108px 0 64px">
+    <div class="wrap">
+      <h1 id="demoTitle" style="margin:0 0 8px;font-size:clamp(1.5rem,2.6vw,2.2rem)">دستیار هوشمند فروش و آکادمی آبادیس</h1>
+      <p id="demoLead" style="max-width:44rem;color:var(--ink-2,#2f4e51);margin:0 0 20px">از دکمه گفتگوی پایین صفحه (یا کادر زیر) درباره محصولات، راهکارهای بالینی، محاسبه صرفه‌جویی بیمارستانی و آکادمی آبادیس بپرسید.</p>
+      <div class="chat-demo-toolbar" style="display:flex;gap:8px;margin-bottom:16px">
+        <button type="button" id="layoutFloat" aria-pressed="true" class="btn btn-outline">حالت شناور (پایین صفحه)</button>
+        <button type="button" id="layoutDock" aria-pressed="false" class="btn btn-outline">نمایش بزرگ در صفحه</button>
+      </div>
+      <div id="abadis-chat-dock" style="max-width:520px"></div>
+    </div>
+  </section>
+</main>
+<script>
+(function () {
+  var themes = ['light', 'dark', 'noir'];
+  function setTheme(next) {
+    document.documentElement.dataset.theme = next;
+    try { localStorage.setItem('abadis-theme', next); } catch (e) {}
+    var on = next === 'light';
+    document.querySelectorAll('.logo, .theme-toggle').forEach(function (node) {
+      node.classList.toggle('on-light', on);
+    });
+  }
+  setTheme(document.documentElement.dataset.theme || 'light');
+  document.getElementById('themeBtn').addEventListener('click', function () {
+    var cur = document.documentElement.dataset.theme || 'light';
+    setTheme(themes[(themes.indexOf(cur) + 1) % themes.length]);
+  });
+  document.getElementById('layoutFloat').addEventListener('click', function () {
+    if (window.AbadisChat) { window.AbadisChat.float(); window.AbadisChat.open(); }
+    document.getElementById('layoutFloat').setAttribute('aria-pressed', 'true');
+    document.getElementById('layoutDock').setAttribute('aria-pressed', 'false');
+  });
+  document.getElementById('layoutDock').addEventListener('click', function () {
+    if (window.AbadisChat) window.AbadisChat.dock(document.getElementById('abadis-chat-dock'));
+    document.getElementById('layoutDock').setAttribute('aria-pressed', 'true');
+    document.getElementById('layoutFloat').setAttribute('aria-pressed', 'false');
+  });
+  window.addEventListener('DOMContentLoaded', function () {
+    setTimeout(function () { if (window.AbadisChat) window.AbadisChat.open(); }, 150);
+  });
+})();
+</script>
+<script src="../assets/chatbot/kb-fallback.js?v=20261028p" defer></script>
+<script src="../assets/chatbot/chatbot.js?v=20261028p" defer data-demo="true" data-kb="../assets/data/abadis-knowledge-base.json"></script>
+</body>
+</html>
